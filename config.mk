@@ -5,7 +5,7 @@ VERSION = 5.9.1
 
 # paths
 #PREFIX = /usr/local
-PREFIX = $(HOME)/app/suckless
+PREFIX = $(HOME)/app
 MANPREFIX = ${PREFIX}/share/man
 
 X11INC = /usr/X11R6/include
