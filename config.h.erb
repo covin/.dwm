@@ -19,17 +19,17 @@ static const unsigned int bottomgap = 16;
 /* tagging */
 <% tags = {
     # XXX  alternatively, define value as hash type {lbl => ?, k => ?}
-    home:   ['XK_1'],
-    code:   ['XK_2', 'XK_c'],
-    mail:   ['XK_3', 'XK_m'],
-    net:    ['XK_4', 'XK_n'],
-    sys:    ['XK_5', 'XK_s'],
-    remote: ['XK_6', 'XK_r'],
-    vbox:   ['XK_7', 'XK_v'],
-    note:   ['XK_8'],
-    chat:   ['XK_9', 'XK_t']
+    home:   { label: "home", shortcut: ['XK_1'] },
+    code:   { label: "code", shortcut: ['XK_2', 'XK_c'] },
+    mail:   { label: "mail", shortcut: ['XK_3', 'XK_m'] },
+    net:    { label: "net", shortcut: ['XK_4', 'XK_n'] },
+    sys:    { label: "sys", shortcut: ['XK_5', 'XK_s'] },
+    remote: { label: "remote", shortcut: ['XK_6', 'XK_r'] },
+    vbox:   { label: "vbox", shortcut: ['XK_7', 'XK_v'] },
+    note:   { label: "note", shortcut: ['XK_8'] },
+    chat:   { label: "chat", shortcut: ['XK_9', 'XK_t'] }
 } %>
-static const char *tags[] = {<%= tags.keys.map{ |t| "\"" + t.to_s + "\""}.join(',') %>};
+static const char *tags[] = {<%= tags.values.map{ |h| h[:label].inspect }.join(',') %>};
 
 static const Rule rules[] = {
 	/* class,        instance,   title,            tags mask,                           isfloating,  monitor */
@@ -62,14 +62,14 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 /* first entry is default */
 /* no layout function means floating behavior */
 <% layouts = {
-  tile:        "[]=",  # "\u00FE",
-  nil =>       "><>",  # "\u00FD",
-  monocle:     "[M]",  # "\u00FF",
-  grid:        "HHH",  # "\u00FA",
-  dwindle:     "[\\]", # "\u00F9",
-  spiral:      "(@)",  # "\u00F8",
-  bstack:      "TTT",  # "\u00F5",
-  bstackhoriz: "===",  # "\u00FB",
+  tile:        "\u00FE", # "[]=",  #
+  nil =>       "\u00FD", # "><>",  #
+  monocle:     "\u00FF", # "[M]",  #
+  grid:        "\u00FA", # "HHH",  #
+  dwindle:     "\u00F9", # "[\\]", #
+  spiral:      "\u00F8", # "(@)",  #
+  bstack:      "\u00F5", # "TTT",  #
+  bstackhoriz: "\u00FB", # "===",  #
 } %>
 static const Layout layouts[] = {<%= layouts.map {|func, icon| "{#{icon.inspect}, #{func || :NULL}}" }.join(',') %>};
 
@@ -119,8 +119,8 @@ static Key keys[] = {
          * not supported by all layouts */
 	{ MODKEY|ShiftMask,              XK_i,              incnmaster,      {.i = +1 } },
 	{ MODKEY|ShiftMask,              XK_d,              incnmaster,      {.i = -1 } },
-	{ MODKEY|MODALT,                 XK_l,              setmfact,        {.f = -0.05} },
-	{ MODKEY|MODALT,                 XK_h,              setmfact,        {.f = +0.05} },
+	{ MODKEY|MODALT,                 XK_l,              setmfact,        {.f = +0.05} },
+	{ MODKEY|MODALT,                 XK_h,              setmfact,        {.f = -0.05} },
         /* iterate over views/tags */
 	{ MODKEY,                        XK_comma,          shiftview,       {.i = -1 } },
 	{ MODKEY,                        XK_period,         shiftview,       {.i = +1 } },
@@ -150,13 +150,12 @@ static Key keys[] = {
         { MODALT|ShiftMask,              XK_period,         tagmon,          {.i = +1 } },
         // TODO missing keep focus behaviour
         /* view operations per tag declaration (goto, show, moveto, addto) */
-        <% shortcuts = tags.values
-           shortcuts.each_index do |index|
-               shortcuts[index].each do |k|
-        %>TAGKEYS(<%= k %>, <%= index %>)
+        <% tags.values.each_with_index do |tag, i|
+            tag[:shortcut].each do |sc|
+        %>TAGKEYS(<%= sc %>, <%= i %>)
         <% end
         end %>
-	{ MODALT|ControlMask,            XK_BackSpace,      quit,            {0} },
+	{ MODALT|ControlMask,            XK_End,            quit,            {0} },
 };
 
 /* button definitions */
