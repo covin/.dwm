@@ -1,15 +1,15 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-tamsynmod-medium-r-*-*-15-*-*-*-*-*-*-*"
+static const char font[]            = "-*-stlarch-*-*-*-*-16-*-*-*-*-*-*-*"
                                       ","
                                       "-*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*";
-static const char normbordercolor[] = "#444444";
-static const char normbgcolor[]     = "#3f3f3f";
-static const char normfgcolor[]     = "#8cd0d0";
-static const char selbordercolor[]  = "#8faf9f";
+static const char normbordercolor[] = "#222222";
+static const char normbgcolor[]     = "#2f2f2f";
+static const char normfgcolor[]     = "#dcdccc";
+static const char selbordercolor[]  = "#8cd0d0";
 static const char selbgcolor[]      = "#2f2f2f";
-static const char selfgcolor[]      = "#dcdccc";
+static const char selfgcolor[]      = "#60d0d0";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
@@ -62,14 +62,14 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 /* first entry is default */
 /* no layout function means floating behavior */
 <% layouts = {
-  tile:        "\u00FE", # "[]=",  #
-  nil =>       "\u00FD", # "><>",  #
-  monocle:     "\u00FF", # "[M]",  #
-  grid:        "\u00FA", # "HHH",  #
-  dwindle:     "\u00F9", # "[\\]", #
-  spiral:      "\u00F8", # "(@)",  #
-  bstack:      "\u00F5", # "TTT",  #
-  bstackhoriz: "\u00FB", # "===",  #
+  tile:        "\uE05E", # "[]=",  #
+  nil =>       "\uE05D", # "><>",  #
+  monocle:     "\uE05F", # "[M]",  #
+  grid:        "\uE05A", # "HHH",  #
+  dwindle:     "\uE059", # "[\\]", #
+  spiral:      "\uE058", # "(@)",  #
+  bstack:      "\uE055", # "TTT",  #
+  bstackhoriz: "\uE05B", # "===",  #
 } %>
 static const Layout layouts[] = {<%= layouts.map {|func, icon| "{#{icon.inspect}, #{func || :NULL}}" }.join(',') %>};
 
