@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-stlarch-*-*-*-*-16-*-*-*-*-*-*-*"
+static const char font[]            = "-*-cosym-*-*-*-*-16-*-*-*-*-*-*-*"
                                       ","
                                       "-*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#222222";
@@ -19,15 +19,15 @@ static const unsigned int bottomgap = 16;
 /* tagging */
 <% tags = {
     # XXX  alternatively, define value as hash type {lbl => ?, k => ?}
-    home:   { label: "home", shortcut: ['XK_1'] },
-    code:   { label: "code", shortcut: ['XK_2', 'XK_c'] },
-    mail:   { label: "mail", shortcut: ['XK_3', 'XK_m'] },
-    net:    { label: "net", shortcut: ['XK_4', 'XK_n'] },
-    sys:    { label: "sys", shortcut: ['XK_5', 'XK_s'] },
-    remote: { label: "remote", shortcut: ['XK_6', 'XK_r'] },
-    vbox:   { label: "vbox", shortcut: ['XK_7', 'XK_v'] },
-    note:   { label: "note", shortcut: ['XK_8'] },
-    chat:   { label: "chat", shortcut: ['XK_9', 'XK_t'] }
+    home:   { label: "\uE060", shortcut: ['XK_1', 'XK_o'] },
+    net:    { label: "\uE063", shortcut: ['XK_2', 'XK_n'] },
+    code:   { label: "\uE01E", shortcut: ['XK_3', 'XK_c'] },
+    remote: { label: "\uE062", shortcut: ['XK_4', 'XK_r'] },
+    vbox:   { label: "\uE061", shortcut: ['XK_5', 'XK_v'] },
+    sys:    { label: "\uE02E", shortcut: ['XK_6', 'XK_s'] },
+    note:   { label: "\uE005", shortcut: ['XK_7'] },
+    mail:   { label: "\uE02C", shortcut: ['XK_m'] },
+    chat:   { label: "\uE064", shortcut: ['XK_t'] }
 } %>
 static const char *tags[] = {<%= tags.values.map{ |h| h[:label].inspect }.join(',') %>};
 
@@ -129,7 +129,7 @@ static Key keys[] = {
 	{ MODALT|ControlMask,            XK_f,              setlayout,       {.v = &layouts[<%= layouts.keys.index nil %>]} },
 	{ MODALT|ControlMask,            XK_g,              setlayout,       {.v = &layouts[<%= layouts.keys.index :grid %>]} },
 	{ MODALT|ControlMask,            XK_s,              setlayout,       {.v = &layouts[<%= layouts.keys.index :spiral %>]} },
-	{ MODALT|ControlMask,            XK_d,              setlayout,       {.v = &layouts[<%= layouts.keys.index :dwindle %>]} },
+	{ MODALT|ControlMask,            XK_w,              setlayout,       {.v = &layouts[<%= layouts.keys.index :dwindle %>]} },
 	{ MODALT|ControlMask,            XK_t,              setlayout,       {.v = &layouts[<%= layouts.keys.index :tile %>]} },
 	{ MODALT|ControlMask,            XK_m,              setlayout,       {.v = &layouts[<%= layouts.keys.index :monocle %>]} },
 	{ MODALT|ControlMask,            XK_b,              setlayout,       {.v = &layouts[<%= layouts.keys.index :bstack %>]} },
