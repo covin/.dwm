@@ -20,12 +20,13 @@ static const unsigned int bottomgap = 16;
 <% tags = {
     # XXX  alternatively, define value as hash type {lbl => ?, k => ?}
     home:   { label: "\uE060", shortcut: ['XK_1', 'XK_o'] },
-    net:    { label: "\uE063", shortcut: ['XK_2', 'XK_n'] },
+    net:    { label: "\uE063", shortcut: ['XK_n'] },
     code:   { label: "\uE01E", shortcut: ['XK_3', 'XK_c'] },
     remote: { label: "\uE062", shortcut: ['XK_4', 'XK_r'] },
     vbox:   { label: "\uE061", shortcut: ['XK_5', 'XK_v'] },
     sys:    { label: "\uE02E", shortcut: ['XK_6', 'XK_s'] },
     note:   { label: "\uE005", shortcut: ['XK_7'] },
+    art:    { label: "\uE065", shortcut: ['XK_a']},
     mail:   { label: "\uE02C", shortcut: ['XK_m'] },
     chat:   { label: "\uE064", shortcut: ['XK_t'] }
 } %>
@@ -39,7 +40,7 @@ static const Rule rules[] = {
 	{ "XFontSel",    NULL,       NULL,             0,                                   True,        -1 },
 	{ "Xmessage",    NULL,       NULL,             0,                                   True,        -1 },
 	{ "Display",     NULL,       NULL,             0,                                   True,        -1 },
-	{ "Gimp",        NULL,       NULL,             0,                                   True,        -1 },
+        { "Gimp",        NULL,       NULL,             1 << <%= tags.keys.index :art %>,    True,        -1 },
 	{ "MPlayer",     NULL,       NULL,             0,                                   True,        -1 },
 	{ "trayer",      NULL,       NULL,             1,                                   True,        -1 },
 	{ "Thunderbird", NULL,       NULL,             1 << <%= tags.keys.index :mail %>,   False,       -1 },
@@ -89,7 +90,6 @@ static const Layout layouts[] = {<%= layouts.map {|func, icon| "{#{icon.inspect}
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-hist", <%= File.expand_path('~/.dwm_history').inspect %>, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[] = { "urxvtc", NULL };
-// static const char *browser_cmd[] = { "chromium", NULL };
 // static const char *filer_cmd[] = { "thunar", NULL };
 static const char *editor_cmd[] = { "gvim", NULL };
 
@@ -117,8 +117,8 @@ static Key keys[] = {
 	{ MODKEY,                        XK_Return,         zoom,            {0} },
         /* modify number of clients in master container area and its size
          * not supported by all layouts */
-	{ MODKEY|ShiftMask,              XK_i,              incnmaster,      {.i = +1 } },
-	{ MODKEY|ShiftMask,              XK_d,              incnmaster,      {.i = -1 } },
+	{ MODKEY|MODALT,                 XK_i,              incnmaster,      {.i = +1 } },
+	{ MODKEY|MODALT,                 XK_d,              incnmaster,      {.i = -1 } },
 	{ MODKEY|MODALT,                 XK_l,              setmfact,        {.f = +0.05} },
 	{ MODKEY|MODALT,                 XK_h,              setmfact,        {.f = -0.05} },
         /* iterate over views/tags */
