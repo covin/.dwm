@@ -39,6 +39,7 @@ static const Rule rules[] = {
 	{ NULL/*xev*/,   NULL,       "Event Tester",   0,                                   True,        -1 },
 	{ "XFontSel",    NULL,       NULL,             0,                                   True,        -1 },
 	{ "Xmessage",    NULL,       NULL,             0,                                   True,        -1 },
+	{ "Thunar",      NULL,       NULL,             0,                                   True,        -1 },
 	{ "Display",     NULL,       NULL,             0,                                   True,        -1 },
         { "Gimp",        NULL,       NULL,             1 << <%= tags.keys.index :art %>,    True,        -1 },
 	{ "MPlayer",     NULL,       NULL,             0,                                   True,        -1 },
@@ -90,7 +91,7 @@ static const Layout layouts[] = {<%= layouts.map {|func, icon| "{#{icon.inspect}
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-hist", <%= File.expand_path('~/.dwm_history').inspect %>, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[] = { "urxvtc", NULL };
-// static const char *filer_cmd[] = { "thunar", NULL };
+static const char *filer_cmd[] = { "thunar", NULL };
 static const char *editor_cmd[] = { "gvim", NULL };
 
 #include "movestack.c"
@@ -100,6 +101,7 @@ static Key keys[] = {
 	{ MODKEY,                        XK_p,              spawn,           {.v = dmenucmd } },
 	{ MODKEY,                        XK_x,              spawn,           {.v = termcmd } },
 	{ MODKEY,                        XK_e,              spawn,           {.v = editor_cmd } },
+	{ MODKEY,                        XK_f,              spawn,           {.v = filer_cmd } },
 	{ MODKEY,                        XK_b,              togglebar,       {0} },
         /* move (over) clients with vim keybinding feeling. In some cases its
          * more intiuitve to move 'up' and 'down' */
